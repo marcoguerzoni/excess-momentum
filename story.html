@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Treadmill — Excess Innovation Momentum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --fg: #1A1A18;
+  --accent: #8B2500;
+  --muted: #7A7A72;
+  --border: #E0DED8;
+  --card-bg: #F2F1ED;
+  --max-w: 660px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 200;
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+}
+nav .nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+nav .logo a {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+}
+nav .logo a:hover { text-decoration: none; }
+.back-link {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); text-decoration: none; }
+
+/* HEADER */
+.page-header {
+  padding: 8rem 1.5rem 3rem;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.page-header .label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+  opacity:0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+  opacity:0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.page-header .h-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--muted);
+  margin-bottom: 2rem;
+  opacity:0; animation: fadeUp 0.8s 0.55s forwards;
+}
+.page-header .byline {
+  font-size: 0.82rem;
+  color: var(--muted);
+  opacity:0; animation: fadeUp 0.8s 0.7s forwards;
+}
+.page-header .byline strong { color: var(--fg); font-weight: 500; }
+
+/* DIVIDER */
+.story-divider {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* CONTENT */
+.content {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+.content p {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.85;
+  color: #2C2C28;
+  margin-bottom: 1.6rem;
+  text-indent: 1.8em;
+}
+.content p:first-child { text-indent: 0; }
+.content p em {
+  font-style: italic;
+  color: var(--fg);
+}
+.content p strong {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* pull quotes */
+.pull-quote {
+  border-left: 3px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin: 2.5rem 0;
+  background: var(--card-bg);
+}
+.pull-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: var(--fg);
+  text-indent: 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* BACK LINK */
+.back-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--border);
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--accent); text-decoration: none; }
+.back-btn .arr { transition: transform 0.3s; display: inline-block; }
+.back-btn:hover .arr { transform: translateX(-4px); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .content p { font-size: 1.05rem; }
+  .page-header { padding: 7rem 1.2rem 2.5rem; }
+  .content { padding: 2.5rem 1.2rem 5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><a href="index.html">Excess Innovation Momentum</a></div>
+    <a href="index.html" class="back-link">← Home</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="label">Narrative Essay</div>
+  <h1>The Treadmill</h1>
+  <p class="h-subtitle">How Silicon Valley's Winning Streak Is Starving the Real Economy</p>
+  <p class="byline"><strong>Marco Guerzoni</strong> &nbsp;·&nbsp; Working Paper companion piece, 2026</p>
+</div>
+
+<div class="story-divider"></div>
+
+<div class="content">
+
+  <p>In the spring of 2014, a small robotics company in Fremont, California, was finally getting good at what it did. After four years of work, the engineers at Meridian Automation had tuned their warehouse-sorting system to near perfection. The factory workers who operated the machines knew them intimately — which joints stuck in cold weather, which sensor needed recalibrating after a power cycle, which shortcuts shaved eleven seconds off a pallet rotation. Throughput was up twenty-two percent. Error rates were cut in half. The technology was not glamorous, but it was finally <em>working</em>.</p>
+
+  <p>Then a venture-backed startup in Palo Alto unveiled a newer, sleeker system built around a different architecture. Within six months, Meridian's largest client had signed a contract with the newcomer. Within a year, Meridian was gone.</p>
+
+  <p>The new system did not work — not yet. It would take its own four years of embedding, of workers learning its quirks and engineers patching its blind spots. But that did not matter to the venture capitalists who funded it. What mattered was the patent, the press coverage, the Series B valuation. The founders were already rich on paper. The investors were already marking up the fund. And somewhere in Fremont, a generation of hard-won operational knowledge was evaporating, taking real productivity gains with it.</p>
+
+  <div class="pull-quote">
+    <p>"This is a story that has played out hundreds of times across the American economy since the turn of the century, and it goes a long way toward explaining one of the strangest puzzles in modern economics: why the most innovative nation on earth has stopped getting more productive."</p>
+  </div>
+
+  <p>The numbers are stark. Since 2005, total factor productivity growth in the United States has been cut roughly in half, falling from around one and a half percent per year to barely half a percent. This is not a measurement quirk or a recessionary hangover; the slowdown began before the financial crisis and has persisted through every subsequent recovery. At the same time, spending on research and development has surged. R&amp;D as a share of GDP rose from two and a half percent in the mid-1990s to three and a half percent by the end of the last decade. Patent applications tripled. Venture capital investment shattered records year after year. By every input measure, America has been innovating harder than ever. By the output measure that matters — productivity — it has less and less to show for it.</p>
+
+  <p>The conventional wisdom says ideas are simply getting harder to find. There is truth in that, but it misses something crucial. An invention does not raise productivity the moment it is patented. It raises productivity only after it has been <em>absorbed</em> — after workers have learned its rhythms, managers have restructured processes around it, and complementary investments in training and infrastructure have been made. This absorption takes years, sometimes decades. And it is precisely this slow, unglamorous process that Silicon Valley's relentless cycle of disruption keeps destroying.</p>
+
+  <p>Think of each major technology as a wave. When a wave is born — a new platform, a new architecture — it starts small. Early adopters fumble with it. But as experience accumulates, the wave matures: workers develop tacit knowledge, firms build complementary systems, and productivity accelerates. This is the phase where the real economic payoff lives. Now imagine another wave arrives before the first one matures. The clock resets. All that accumulated know-how is suddenly obsolete. The economy is back at the bottom of a new learning curve. If this happens once, it is creative destruction at its finest. If it happens <em>over and over</em>, the economy never reaches the productive phase of any wave. It is perpetually starting over.</p>
+
+  <p>This is exactly what an overheated innovation economy produces. And here is the vicious part: the very dynamics that make it destructive also make it enormously profitable for the people driving it.</p>
+
+  <p>A venture capitalist does not capture the productivity gains a technology delivers to the broader economy five years after adoption. She captures value at the moment of disruption — when the patent is filed, the startup acquired, the IPO priced. The destruction of the old wave's accumulated knowledge is invisible to her balance sheet. It is an externality, borne by factory workers in Fremont and IT departments in Cleveland who must, once again, throw out what they know and start over.</p>
+
+  <p>Worse, the profits from disruption feed back into more disruption. When R&amp;D-intensive firms on the NASDAQ earn spectacular returns — four to six percentage points of annual alpha above the broad market, year after year, unexplained by any standard risk factor — capital flows toward them. Venture funds raise larger rounds. Limited partners increase allocations to innovation-heavy strategies. Startups find it easier to hire, easier to poach talent, easier to convince a client to abandon a mature system for a shiny prototype. The financial system, rationally responding to genuine private returns, pours fuel on a fire that is burning the economy's productive capacity.</p>
+
+  <div class="pull-quote">
+    <p>"This is not a market failure of too little innovation. It is a market failure of <em>too much</em> — or rather, too much of the wrong kind."</p>
+  </div>
+
+  <p>The innovator who resets a technological wave captures the full patent prize regardless of whether the wave she destroyed was nearly mature and about to deliver enormous gains, or barely started and worth little. The price system simply does not encode that information.</p>
+
+  <p>The result is excess innovation momentum: a self-reinforcing cycle in which high private returns attract more capital, which accelerates technological displacement, which prevents the economy from harvesting any single technology's productivity potential — which, paradoxically, keeps private returns to the <em>next</em> invention high, because each new technology holds out gains that are perpetually deferred. The venture capitalist is not wrong to invest. The entrepreneur is not wrong to invent. Each responds rationally to her incentives. But the collective outcome is an economy running harder and harder on an accelerating treadmill, covering less and less ground.</p>
+
+  <p>The recent surge of capital into artificial intelligence may be the most dramatic illustration yet. AI valuations have soared and investment is enormous, but aggregate productivity has barely moved. We are watching, in real time, the early phase of yet another wave — and the capital flooding in virtually guarantees that the next wave will arrive before this one matures.</p>
+
+  <p>If this diagnosis is correct, the policy implications are unsettling. The standard prescription — subsidize R&amp;D, extend patent protections, deepen capital markets — would make the problem worse. What is needed instead is something economists are reluctant to recommend: mechanisms that <em>slow down</em> technological displacement during periods of high innovation fertility. Shorter patents during innovation booms. Taxes on wave-resetting inventions that scale with the maturity of the technology they displace. Friction in the financial pipeline channeling equity capital into R&amp;D. These are blunt instruments and easy to get wrong. But the alternative is to keep celebrating innovation inputs while watching productivity decay — to keep marveling at the treadmill's speed while the runner stands still.</p>
+
+  <p>Back in Fremont, the warehouse that once housed Meridian's machines is a fulfillment center now, running a system that is itself two generations behind the frontier. The workers know every quirk of the current setup, and throughput is strong. But the trade press is already buzzing about a new entrant, backed by a sixteen-billion-dollar fund, promising to revolutionize warehouse logistics with a radical new approach. The patent is pending. The term sheet is signed. The treadmill is ready for another spin.</p>
+
+</div>
+
+<div class="back-section">
+  <a href="index.html" class="back-btn"><span class="arr">←</span> Back to the paper</a>
+</div>
+
+<footer>
+  <p>Excess Innovation Momentum — Working Paper, 2026</p>
+</footer>
+
+</body>
+</html>

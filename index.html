@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excess Innovation Momentum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --fg: #1A1A18;
+  --accent: #8B2500;
+  --muted: #7A7A72;
+  --border: #E0DED8;
+  --card-bg: #F2F1ED;
+  --max-w: 720px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 200;
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+}
+nav .nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+nav .logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+.nav-links { display:flex; gap:1.5rem; align-items:center; }
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--accent); text-decoration:none; }
+
+/* hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--fg);
+  transition: all 0.3s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px; left:0; right:0;
+  background: rgba(250,250,248,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 1.5rem;
+  z-index: 199;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+
+@media (max-width: 600px) {
+  .hamburger { display: flex; }
+  .nav-links { display: none; }
+  nav .logo { max-width: 75%; font-size: 0.9rem; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+}
+.hero-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+  opacity:0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.5rem, 4.5vw, 2.6rem);
+  line-height: 1.35;
+  max-width: 640px;
+  color: var(--fg);
+  margin-bottom: 1.8rem;
+  opacity:0; animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-quote em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 400;
+}
+.hero-attr {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  opacity:0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity:0; animation: fadeUp 0.8s 1.1s forwards;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--fg);
+  padding: 0.65rem 1.6rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  transition: all 0.3s;
+}
+.hero-cta:hover {
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+}
+.hero-cta.secondary {
+  border-color: var(--muted);
+  color: var(--muted);
+}
+.hero-cta.secondary:hover {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+}
+.hero-cta .arrow { transition: transform 0.3s; }
+.hero-cta:hover .arrow { transform: translateX(4px); }
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  opacity:0; animation: fadeUp 0.8s 1.6s forwards;
+}
+.hero-scroll span {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: scrollPulse 2s 2s infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 5rem 1.5rem; }
+.container { max-width: var(--max-w); margin: 0 auto; }
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  line-height: 1.3;
+  margin-bottom: 1.4rem;
+}
+
+/* ─── TIMELINE ─── */
+.timeline-section {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 5rem 1.5rem;
+}
+.timeline-intro {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin-bottom: 3.5rem;
+  line-height: 1.75;
+}
+.timeline-intro strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+.tl {
+  position: relative;
+  padding-left: 0;
+}
+/* vertical line */
+.tl::before {
+  content: '';
+  position: absolute;
+  left: 72px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0 1.8rem;
+  margin-bottom: 0;
+  position: relative;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid transparent;
+  transition: background 0.25s;
+  cursor: default;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item:hover { background: var(--card-bg); border-radius: 4px; }
+.tl-left {
+  text-align: right;
+  padding-right: 0;
+  padding-top: 2px;
+  position: relative;
+}
+.tl-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+/* dot on the line */
+.tl-dot {
+  position: absolute;
+  right: -9px;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  transition: border-color 0.25s, background 0.25s;
+  z-index: 1;
+}
+.tl-item:hover .tl-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.tl-right { padding-right: 1rem; }
+.tl-wave {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--fg);
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+.tl-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.tl-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(139,37,0,0.07);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+/* wave maturity bar */
+.tl-bar-wrap {
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tl-bar-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tl-bar-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tl-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.6;
+  transition: width 0.6s ease;
+}
+/* last item is current, still growing */
+.tl-item.current .tl-bar-fill {
+  animation: barGrow 2s 0.5s ease-out forwards;
+}
+@keyframes barGrow {
+  from { width: 10%; }
+  to   { width: var(--bar-w); }
+}
+
+/* mobile timeline */
+@media (max-width: 520px) {
+  .tl::before { left: 0; }
+  .tl-item {
+    grid-template-columns: 1fr;
+    padding-left: 1.4rem;
+  }
+  .tl-left {
+    text-align: left;
+    margin-bottom: 0.2rem;
+  }
+  .tl-dot {
+    right: auto;
+    left: -1.4rem;
+    top: 6px;
+  }
+  .tl-right { padding-right: 0; }
+  .tl::before { left: 3px; }
+}
+
+/* ─── MECHANISM ─── */
+.mechanism-section { border-top: 1px solid var(--border); }
+.mechanism-text {
+  color: var(--muted);
+  font-size: 0.93rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.75;
+}
+.read-more {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.read-more:hover .arrow { transform: translateX(4px); }
+.read-more .arrow { transition: transform 0.3s; display:inline-block; }
+
+/* ─── STORY TEASER ─── */
+.story-section {
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.story-card {
+  border-left: 3px solid var(--accent);
+  padding: 2rem 2rem;
+}
+.story-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.story-subtitle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+.story-excerpt {
+  font-size: 0.92rem;
+  color: #3A3A36;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.story-excerpt em { color: var(--accent); font-style: italic; }
+
+/* ─── EVIDENCE ─── */
+.evidence-section { border-top: 1px solid var(--border); }
+.evidence-card {
+  background: var(--card-bg);
+  padding: 1.8rem 2rem;
+  border-left: 3px solid var(--accent);
+  margin-bottom: 1.4rem;
+  min-height: 130px;
+  transition: opacity 0.4s;
+}
+.ev-source {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.ev-text {
+  font-size: 0.92rem;
+  color: var(--fg);
+  margin-bottom: 0.9rem;
+  line-height: 1.65;
+}
+.ev-link { font-size: 0.8rem; font-weight: 500; }
+.btn-more {
+  background: none;
+  border: 1px solid var(--muted);
+  padding: 0.5rem 1.3rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-more:hover { border-color: var(--fg); color: var(--fg); }
+
+/* ─── ABOUT ─── */
+.about-section { border-top: 1px solid var(--border); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2.2rem;
+  align-items: start;
+}
+.about-photo {
+  width: 140px;
+  height: 180px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.about-bio { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.about-bio strong { color: var(--fg); font-weight: 500; }
+.about-links {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.about-links a {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.2rem 1.5rem;
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+footer a { color: var(--muted); }
+footer a:hover { color: var(--accent); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  section { padding: 3.5rem 1.2rem; }
+  .timeline-section { padding: 3.5rem 1.2rem; }
+  .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .about-links { justify-content: center; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .story-card { padding: 1.5rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Excess Innovation Momentum</div>
+    <div class="nav-links">
+      <a href="#timeline">Timeline</a>
+      <a href="#mechanism">Mechanism</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#about">About</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#timeline" onclick="closeMobile()">Timeline</a>
+  <a href="#mechanism" onclick="closeMobile()">Mechanism</a>
+  <a href="#evidence" onclick="closeMobile()">Evidence</a>
+  <a href="story.html" onclick="closeMobile()">The Treadmill</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;">
+  <div class="hero-label">Working Paper · 2026</div>
+  <blockquote class="hero-quote">
+    "The time it takes us to study a new technology now <em>exceeds that technology's relevance window.</em>"
+  </blockquote>
+  <p class="hero-attr">— CIO interview, Deloitte Tech Trends 2026</p>
+  <div class="hero-ctas">
+    <a href="mechanism.html" class="hero-cta">
+      Read the paper <span class="arrow">→</span>
+    </a>
+    <a href="story.html" class="hero-cta secondary">
+      The Treadmill <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="container">
+    <div class="section-label">The Technology Treadmill</div>
+    <h2>Twenty-five years of waves that never matured</h2>
+    <p class="timeline-intro fade-in">
+      Each wave demanded new hires, new vendors, and new organizational processes.
+      <strong>Most firms never fully harvested any single wave before the next arrived.</strong>
+      The average ERP replacement cycle is 10+ years — the waves below arrive every 2–4.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2000<br>–2005</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">On-premises ERP</div>
+          <div class="tl-desc">SAP, Oracle, PeopleSoft. Multi-year implementations costing $10M–$500M+. Massive organizational change. Many failed before delivering returns (Hershey's, Nike, Waste Management).</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:45%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2005<br>–2010</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Web 2.0 &amp; Early SaaS</div>
+          <div class="tl-desc">Salesforce, Workday. Shift from licensed software to subscriptions. New vendor relationships. CRM and HR moved to cloud first — before ERP implementations were complete.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:38%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2010<br>–2013</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Big Data</div>
+          <div class="tl-desc">Hadoop, MapReduce, NoSQL. "Data Scientist" — a title barely used before 2010 — became one of the hottest jobs in America. Firms built data lakes. New infrastructure teams hired and trained.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:30%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2013<br>–2016</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Cloud Migration &amp; Analytics</div>
+          <div class="tl-desc">AWS, Azure, Spark, Tableau. On-premises data centers abandoned. Spark replaced Hadoop. BI teams retooled. "Cloud Architect" emerged as a mandatory hire. Data lakes rebuilt in the cloud.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:35%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2016<br>–2019</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Machine Learning Platforms</div>
+          <div class="tl-desc">TensorFlow, PyTorch, AutoML. Companies built internal ML teams and invested in GPU infrastructure. Most ML projects never reached production. The ML Engineer role was created from scratch.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2019<br>–2021</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Cloud-Native Everything</div>
+          <div class="tl-desc">Kubernetes, microservices, MLOps. Monolithic applications rewritten. "Platform Engineer" and "MLOps Engineer" emerged as distinct roles. Containerization became mandatory. Prior ML investments reframed as technical debt.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:28%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2022<br>–2023</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Generative AI &amp; LLMs</div>
+          <div class="tl-desc">"Prompt Engineer" invented. Firms ran GenAI proofs-of-concept; 95% failed (MIT). Enterprise AI spend surged regardless. Prior ML investments written off as the paradigm shifted to foundation models.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:18%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2024<br>–2025</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">AI-Native Platforms &amp; Copilots</div>
+          <div class="tl-desc">Firms abandoned "build" for "buy." Copilot features embedded in all enterprise software. New pricing models (consumption-based, AELA). Prior ML and GenAI investments written off as the platform layer shifted again.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity at reset</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="width:15%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item current fade-in">
+        <div class="tl-left">
+          <div class="tl-year">2026<br>–?</div>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-wave">Autonomous Agents &amp; ERP Abstraction</div>
+          <div class="tl-desc">ERP itself being "abstracted" by process automation. Agentic AI projects launching — Gartner predicts 40% will be canceled by 2027. AI startups scale to $30M revenue 5× faster than SaaS ever did. The cycle continues.</div>
+          <div class="tl-bar-wrap">
+            <span class="tl-bar-label">Wave maturity</span>
+            <div class="tl-bar-track"><div class="tl-bar-fill" style="--bar-w:20%; width:5%"></div></div>
+          </div>
+          <div class="tl-tag">Ongoing</div>
+        </div>
+      </div>
+
+    </div><!-- /.tl -->
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section class="mechanism-section" id="mechanism">
+  <div class="container fade-in">
+    <div class="section-label">The Central Mechanism</div>
+    <h2>What if the economy innovates <em>too much</em>?</h2>
+    <p class="mechanism-text">
+      Each new technology follows a slow learning curve before it delivers productivity gains. When the next invention arrives before adopters reach the harvesting phase, it destroys the embedded know-how they had built. The innovator captures the patent prize but ignores this social cost. In a fertile innovation environment, firms innovate too frequently — perpetually restarting the learning curve. Aggregate productivity stagnates precisely because innovation effort is high.
+    </p>
+    <p class="mechanism-text">
+      A financial amplification channel deepens the distortion: high returns to R&amp;D-intensive firms relax financing constraints, channeling yet more capital into invention and pushing realized innovation rates further above the social optimum.
+    </p>
+    <a href="mechanism.html" class="read-more">
+      Full mechanism &amp; model <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- STORY TEASER -->
+<section class="story-section" id="story">
+  <div class="container">
+    <div class="section-label">Narrative Essay</div>
+    <div class="story-card fade-in">
+      <div class="story-title">The Treadmill</div>
+      <div class="story-subtitle">How Silicon Valley's Winning Streak Is Starving the Real Economy</div>
+      <p class="story-excerpt">
+        In the spring of 2014, a small robotics company in Fremont, California, was finally getting good at what it did. The workers knew the machines intimately — which joints stuck in cold weather, which shortcuts shaved eleven seconds off a pallet rotation. Throughput was up twenty-two percent. Error rates were cut in half. Then a venture-backed startup unveiled a newer system. Within a year, Meridian was gone — and all that hard-won knowledge evaporated with it.
+      </p>
+      <p class="story-excerpt">
+        This is a story that has played out hundreds of times across the American economy, and it goes a long way toward explaining one of the strangest puzzles in modern economics: <em>why the most innovative nation on earth has stopped getting more productive.</em>
+      </p>
+      <a href="story.html" class="read-more">
+        Read the full essay <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section class="evidence-section" id="evidence">
+  <div class="container fade-in">
+    <div class="section-label">Supporting Evidence</div>
+    <h2>From the news</h2>
+    <div class="evidence-card" id="ev-card">
+      <div class="ev-source" id="ev-source"></div>
+      <div class="ev-text" id="ev-text"></div>
+      <a class="ev-link" id="ev-link" href="#" target="_blank">Read full article →</a>
+    </div>
+    <button class="btn-more" onclick="showNext()">More evidence ↻</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="section-label">About the Author</div>
+    <div class="about-grid fade-in">
+      <div class="about-photo">Photo</div>
+      <div>
+        <h2 style="font-size:1.35rem; margin-bottom:0.8rem;">Marco Guerzoni</h2>
+        <p class="about-bio">
+          <strong>Associate Professor of Applied Economics</strong> at the University of Milano-Bicocca (DEMS) and Research Fellow at BETA, Strasbourg University. Formerly visiting scholar at the <strong>Growth Lab, Harvard Kennedy School</strong>. Co-founder of <strong>Despina</strong>, the Big Data Lab at the University of Turin. His research spans the economics of innovation, technology policy, and advanced data science applied to economics and business intelligence. Published in <em>Research Policy</em>, <em>Cambridge Journal of Economics</em>, <em>Industrial and Corporate Change</em>, and the <em>Journal of Evolutionary Economics</em>.
+        </p>
+        <div class="about-links">
+          <a href="https://scholar.google.com/citations?user=Y3WFwg4AAAAJ" target="_blank">Google Scholar</a>
+          <a href="https://en.unimib.it/marco-guerzoni" target="_blank">University Page</a>
+          <a href="https://growthlab.hks.harvard.edu/person/marco-guerzoni/" target="_blank">Harvard Growth Lab</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Excess Innovation Momentum — Working Paper, 2026</p>
+  <p style="margin-top:0.4rem;">
+    <a href="mechanism.html">The Model</a> &nbsp;·&nbsp;
+    <a href="story.html">The Treadmill</a> &nbsp;·&nbsp;
+    <a href="#about">Marco Guerzoni</a>
+  </p>
+</footer>
+
+<script>
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+document.addEventListener('click', e => {
+  if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile();
+});
+const nav = document.querySelector('nav');
+
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Evidence cards
+const evidence = [
+  {
+    source: "Fortune — Feb 2026",
+    text: "Over 80% of firms report zero productivity gains from AI despite billions invested. Apollo's chief economist: \"AI is everywhere except in the incoming macroeconomic data.\"",
+    url: "https://fortune.com/2026/02/17/ai-productivity-paradox-ceo-study-robert-solow-information-technology-age/"
+  },
+  {
+    source: "NY Fed — Jan 2025",
+    text: "R&D intensity has risen steadily since 1987 while manufacturing productivity growth has fallen to near zero — the R&D investment paradox in real time.",
+    url: "https://libertystreeteconomics.newyorkfed.org/2025/01/the-rd-puzzle-in-u-s-manufacturing-productivity-growth/"
+  },
+  {
+    source: "OECD — 2026",
+    text: "Global venture capital in AI surged from $8.3 billion in 2012 to $258.7 billion in 2025 — now 61% of all VC investment globally. The financial amplification loop is accelerating.",
+    url: "https://www.oecd.org/en/publications/venture-capital-investments-in-artificial-intelligence-through-2025_a13752f5-en/full-report.html"
+  },
+  {
+    source: "NBER / METR Study — 2025",
+    text: "Senior developers are 19% slower when using AI coding tools. The learning curve resets productivity before gains materialize — a micro-level wave reset.",
+    url: "https://coder.com/blog/the-ai-learning-curve-why-devs-get-slower-before-they-get-faster"
+  },
+  {
+    source: "Deloitte Tech Trends — 2026",
+    text: "AI startups scale to $30M revenue 5x faster than SaaS companies did. Innovation is compounding multiplicatively — each improvement accelerates all others.",
+    url: "https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends.html"
+  },
+  {
+    source: "SaaStr — Feb 2026",
+    text: "\"The AI agent market is going to see a wave of churn unlike anything B2B SaaS has experienced.\" Switching costs are structurally lower — firms churn before any tool matures.",
+    url: "https://www.saastr.com/the-wave-of-ai-agent-churn-to-come-prompts-are-portable/"
+  },
+  {
+    source: "CME Group — 2024",
+    text: "NASDAQ-100 returned 22,900% since 1985 (14.8% annualized) vs. S&P 500's 7,200%. The persistent tech equity premium reflects innovation rents, not systematic risk.",
+    url: "https://www.cmegroup.com/insights/economic-research/2024/nasdaqs-stellar-returns-potential-risks-ahead.html"
+  },
+  {
+    source: "WIPO — 2025",
+    text: "AI captures 53% of global VC deal value. Capital clustering in a narrow set of late-stage AI champions may widen geographic and sectoral divides rather than drive broad productivity.",
+    url: "https://www.wipo.int/en/web/global-innovation-index/w/blogs/2025/ai-venture-capital"
+  },
+  {
+    source: "CIO Magazine — Jul 2025",
+    text: "Lidl spent €500M over 7 years on SAP ERP, then abandoned it entirely. Nike lost $100M on a botched ERP rollout. Firms invest massively in embedding, then scrap before harvesting.",
+    url: "https://www.cio.com/article/278677/enterprise-resource-planning-10-famous-erp-disasters-dustups-and-disappointments.html"
+  },
+  {
+    source: "Gartner via SaaStr — Nov 2025",
+    text: "Enterprise software spend growing 15.2% — but 9% of CIO budgets go just to absorb price increases. Most AI proof-of-concept projects in 2024 failed. Firms abandoned 'build' for 'buy.'",
+    url: "https://www.saastr.com/gartner-enterprise-software-spend-will-grow-a-stunning-15-2-next-year-but-most-of-that-will-go-to-price-increases-and-ai-apps/"
+  }
+];
+
+let currentIndex = -1;
+function showNext() {
+  const card = document.getElementById('ev-card');
+  card.style.opacity = '0';
+  setTimeout(() => {
+    let next;
+    do { next = Math.floor(Math.random() * evidence.length); } while (next === currentIndex && evidence.length > 1);
+    currentIndex = next;
+    const e = evidence[currentIndex];
+    document.getElementById('ev-source').textContent = e.source;
+    document.getElementById('ev-text').textContent = e.text;
+    const link = document.getElementById('ev-link');
+    link.href = e.url;
+    card.style.opacity = '1';
+  }, 300);
+}
+showNext();
+</script>
+
+</body>
+</html>
