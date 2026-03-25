@@ -504,15 +504,11 @@ h2 {
 .about-photo {
   width: 140px;
   height: 180px;
-  background: var(--card-bg);
+  object-fit: cover;
+  object-position: top center;
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: block;
+  filter: grayscale(15%);
 }
 .about-bio { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
 .about-bio strong { color: var(--fg); font-weight: 500; }
@@ -561,6 +557,7 @@ footer a:hover { color: var(--accent); }
   section { padding: 3.5rem 1.2rem; }
   .timeline-section { padding: 3.5rem 1.2rem; }
   .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .about-photo { width: 120px; height: 150px; }
   .about-links { justify-content: center; }
   .hero-ctas { flex-direction: column; align-items: center; }
   .story-card { padding: 1.5rem 1.2rem; }
@@ -573,9 +570,9 @@ footer a:hover { color: var(--accent); }
   <div class="nav-inner">
     <div class="logo">Excess Innovation Momentum</div>
     <div class="nav-links">
+      <a href="#evidence">Evidence</a>
       <a href="#timeline">Timeline</a>
       <a href="#mechanism">Mechanism</a>
-      <a href="#evidence">Evidence</a>
       <a href="#about">About</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -585,9 +582,9 @@ footer a:hover { color: var(--accent); }
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#evidence" onclick="closeMobile()">Evidence</a>
   <a href="#timeline" onclick="closeMobile()">Timeline</a>
   <a href="#mechanism" onclick="closeMobile()">Mechanism</a>
-  <a href="#evidence" onclick="closeMobile()">Evidence</a>
   <a href="story.html" onclick="closeMobile()">The Treadmill</a>
   <a href="#about" onclick="closeMobile()">About</a>
 </div>
@@ -610,6 +607,20 @@ footer a:hover { color: var(--accent); }
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll</span>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section class="evidence-section" id="evidence">
+  <div class="container fade-in">
+    <div class="section-label">Supporting Evidence</div>
+    <h2>From the news</h2>
+    <div class="evidence-card" id="ev-card">
+      <div class="ev-source" id="ev-source"></div>
+      <div class="ev-text" id="ev-text"></div>
+      <a class="ev-link" id="ev-link" href="#" target="_blank">Read full article →</a>
+    </div>
+    <button class="btn-more" onclick="showNext()">More evidence ↻</button>
   </div>
 </section>
 
@@ -786,10 +797,10 @@ footer a:hover { color: var(--accent); }
 <!-- STORY TEASER -->
 <section class="story-section" id="story">
   <div class="container">
-    <div class="section-label">Narrative Essay</div>
+    <div class="section-label">Fictional Essay · Illustrative Purposes Only</div>
     <div class="story-card fade-in">
       <div class="story-title">The Treadmill</div>
-      <div class="story-subtitle">How Silicon Valley's Winning Streak Is Starving the Real Economy</div>
+      <div class="story-subtitle">How Silicon Valley's Winning Streak Is Starving the Real Economy — <em>a fictional story</em></div>
       <p class="story-excerpt">
         In the spring of 2014, a small robotics company in Fremont, California, was finally getting good at what it did. The workers knew the machines intimately — which joints stuck in cold weather, which shortcuts shaved eleven seconds off a pallet rotation. Throughput was up twenty-two percent. Error rates were cut in half. Then a venture-backed startup unveiled a newer system. Within a year, Meridian was gone — and all that hard-won knowledge evaporated with it.
       </p>
@@ -803,26 +814,12 @@ footer a:hover { color: var(--accent); }
   </div>
 </section>
 
-<!-- EVIDENCE -->
-<section class="evidence-section" id="evidence">
-  <div class="container fade-in">
-    <div class="section-label">Supporting Evidence</div>
-    <h2>From the news</h2>
-    <div class="evidence-card" id="ev-card">
-      <div class="ev-source" id="ev-source"></div>
-      <div class="ev-text" id="ev-text"></div>
-      <a class="ev-link" id="ev-link" href="#" target="_blank">Read full article →</a>
-    </div>
-    <button class="btn-more" onclick="showNext()">More evidence ↻</button>
-  </div>
-</section>
-
 <!-- ABOUT -->
 <section class="about-section" id="about">
   <div class="container">
     <div class="section-label">About the Author</div>
     <div class="about-grid fade-in">
-      <div class="about-photo">Photo</div>
+      <img src="marco.jpg" alt="Marco Guerzoni" class="about-photo">
       <div>
         <h2 style="font-size:1.35rem; margin-bottom:0.8rem;">Marco Guerzoni</h2>
         <p class="about-bio">
