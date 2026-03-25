@@ -67,6 +67,14 @@ nav .logo {
   white-space: nowrap;
 }
 .nav-links a:hover { color: var(--accent); text-decoration:none; }
+.nav-pdf {
+  border: 1px solid var(--accent) !important;
+  color: var(--accent) !important;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s !important;
+}
+.nav-pdf:hover { background: var(--accent) !important; color: var(--bg) !important; }
 
 /* hamburger */
 .hamburger {
@@ -570,10 +578,11 @@ footer a:hover { color: var(--accent); }
   <div class="nav-inner">
     <div class="logo">Excess Innovation Momentum</div>
     <div class="nav-links">
+      <a href="#mechanism">Mechanism</a>
       <a href="#evidence">Evidence</a>
       <a href="#timeline">Timeline</a>
-      <a href="#mechanism">Mechanism</a>
       <a href="#about">About</a>
+      <a href="paper.pdf" target="_blank" class="nav-pdf">↓ Full Paper</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -582,11 +591,12 @@ footer a:hover { color: var(--accent); }
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#mechanism" onclick="closeMobile()">Mechanism</a>
   <a href="#evidence" onclick="closeMobile()">Evidence</a>
   <a href="#timeline" onclick="closeMobile()">Timeline</a>
-  <a href="#mechanism" onclick="closeMobile()">Mechanism</a>
   <a href="story.html" onclick="closeMobile()">The Treadmill</a>
   <a href="#about" onclick="closeMobile()">About</a>
+  <a href="paper.pdf" target="_blank" onclick="closeMobile()">↓ Download Full Paper (PDF)</a>
 </div>
 
 <!-- HERO -->
@@ -607,6 +617,23 @@ footer a:hover { color: var(--accent); }
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section class="mechanism-section" id="mechanism">
+  <div class="container fade-in">
+    <div class="section-label">The Central Mechanism</div>
+    <h2>What if the economy innovates <em>too much</em>?</h2>
+    <p class="mechanism-text">
+      Each new technology follows a slow learning curve before it delivers productivity gains. When the next invention arrives before adopters reach the harvesting phase, it destroys the embedded know-how they had built. The innovator captures the patent prize but ignores this social cost. In a fertile innovation environment, firms innovate too frequently — perpetually restarting the learning curve. Aggregate productivity stagnates precisely because innovation effort is high.
+    </p>
+    <p class="mechanism-text">
+      A financial amplification channel deepens the distortion: high returns to R&amp;D-intensive firms relax financing constraints, channeling yet more capital into invention and pushing realized innovation rates further above the social optimum.
+    </p>
+    <a href="mechanism.html" class="read-more">
+      Full mechanism &amp; model <span class="arrow">→</span>
+    </a>
   </div>
 </section>
 
@@ -774,23 +801,6 @@ footer a:hover { color: var(--accent); }
       </div>
 
     </div><!-- /.tl -->
-  </div>
-</section>
-
-<!-- MECHANISM -->
-<section class="mechanism-section" id="mechanism">
-  <div class="container fade-in">
-    <div class="section-label">The Central Mechanism</div>
-    <h2>What if the economy innovates <em>too much</em>?</h2>
-    <p class="mechanism-text">
-      Each new technology follows a slow learning curve before it delivers productivity gains. When the next invention arrives before adopters reach the harvesting phase, it destroys the embedded know-how they had built. The innovator captures the patent prize but ignores this social cost. In a fertile innovation environment, firms innovate too frequently — perpetually restarting the learning curve. Aggregate productivity stagnates precisely because innovation effort is high.
-    </p>
-    <p class="mechanism-text">
-      A financial amplification channel deepens the distortion: high returns to R&amp;D-intensive firms relax financing constraints, channeling yet more capital into invention and pushing realized innovation rates further above the social optimum.
-    </p>
-    <a href="mechanism.html" class="read-more">
-      Full mechanism &amp; model <span class="arrow">→</span>
-    </a>
   </div>
 </section>
 
